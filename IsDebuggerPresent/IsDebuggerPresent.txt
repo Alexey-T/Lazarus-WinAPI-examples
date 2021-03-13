@@ -1,0 +1,13 @@
+This example demonstrates how to use the API IsDebuggerPresent() to determine
+if a program is running under a debugger or not.   If the program is
+running under a debugger selecting "Break into the debugger" from the
+IsDebuggerPresent() menu, will cause a break into the debugger, otherwise the
+request to break into the debugger will be ignored.
+
+It also demonstrates the difference between using DebugBreak() and an inline
+int 3.  When using DebugBreak(), application debuggers will stop at the
+DebugBreak() line because the _entire_ DebugBreak() procedure has _not_ yet
+been executed, specifically, it stops at the "ret" that is inside DebugBreak().
+
+When using an inline "int 3" the debugger will stop at the next source line
+because the "int 3" has been fully executed unlike the DebugBreak() procedure.

@@ -1,0 +1,53 @@
+This example shows how to call GetModuleHandleEx to determine a module's load
+address based on any address that resides in the module.  For instance,
+knowing that some dll function resides at a specific address,
+GetModuleHandleEx when given that address can return the Dll's load address.
+
+This ability can often be useful to debuggers.
+
+This example also demonstrates how to "pin" a dll in memory, that is, ensuring
+that the dll is not unloaded at an undesirable time.
+
+There are, at least, two cases when that capability is required.
+
+The first is in a multi-threaded environment where one thread obtains a dll's
+module handle while another thread _may_ unload the dll thus invalidating the
+handle obtained by the first thread.  Note, this situation quite likely
+indicates very poor programming, a module should _not_ be loaded by one thread
+and unloaded in another.  IOW, the thread that loads a dll should be the only
+thread responsible for unloading it.
+
+The second case is not as common as the first one described above.  When a
+program injects a dll into another process and the injected dll in turn traps
+functions in application specific dlls then, it is not only conceivable but,
+even likely that the application may decide to unload one of it dlls that
+have function trapped by the injected dll.  When this happens the injected
+dll will call into the void since the dll functions it was trapping are gone.
+
+Pinning down a dll prevents this very undesirable situation taking place.
+
+To see the effects of pinning down a dll use the "Module32First" example
+(source for it will be given in a future post) and follow these steps :
+
+1. After starting the GetModuleHandleEx example, start the Module32First
+   program.
+2. Search and select "GetModuleHandleEx.exe" on the left hand side pane of
+   Module32First
+3. Note the values of "USG" and "usg" for the "GetModuleHandleExDll" (they
+   should both be two (2)
+
+4. Select "Pin and attempt to unload the dll" from the "GetModuleHandleEx"
+   menu.
+
+5. Select "Update snapshot" in the Module32First program.
+
+6. Repeat steps 2 and 3 above.  The values under "USG" and "usg" should read
+   655535 indicating that the dll is pinned.
+
+Every time the "Pin and attempt to unload the dll" option is executed, the
+program attempts to (unsuccessfully) unload the library 100 times.  What should
+be noted is that 100 is _not_ subtracted from the "USG" and "usg" fields. Once
+those fields are set to high(word) they are no longer reference counted.
+
+
+

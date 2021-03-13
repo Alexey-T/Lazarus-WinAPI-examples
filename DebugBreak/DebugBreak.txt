@@ -1,0 +1,89 @@
+This example demonstrates using DebugBreak() to transfer control to a
+debugger. The example should be executed both, under a debugger and directly.
+
+This example also serves to demonstrate how a program can detect if it is
+running under a debugger without using the IsDebuggerPresent() API.
+
+Use the "DebugBreak()" menu item to cause the program execution to fall under
+debugger control.  Use F7/F8/F9 to control execution.
+
+DebugBreak() is very useful to create conditional breakpoints with very
+complex conditions that are beyond the capabilities of an application
+debuggers.
+
+Also, DebugBreak() is useful to set breakpoints where it is usually not
+possible to set them.  For instance, during the loading of a program. Windows
+automatically loads and calls the associated DLLs entry points. A
+strategically placed DebugBreak instruction allows a debugger to gain control
+during the DLLs load process.  This combined with the use of a system
+debugger, such as SoftICE, allows debugging almost any code in the executable.
+
+
+In addition to that, combining the use of DebugBreak() with conditional
+compilation directives allows having the breakpoints, which in large program
+may be numerous, in the program itself.  This prevents "losing" breakpoints by
+exceeding the "breakpoint history" capacity in most debuggers and aids in
+future maintenance as, at least in theory, calls to DebugBreak() should only
+appear (or be left) in the most important or complex section of the code.
+
+DebugBreak() can also be useful to make reverse engineering a program more
+cumbersome to a reverse engineer.  By littering the executable with a fairly
+large number of calls to it (say about 60 or more) this can make reverse
+engineering the application very tedious when it is run under a debugger.
+
+
+
+If you are using NuMega's SoftICE, set "I3HERE" to ON and load the example
+using NuMega's loader.
+
+If you are using TD32 and, assuming TD32's directory is in the current path,
+start the example by typing "TD32 DebugBreak".
+
+Ignore the message "program has no symbol table" and press F9 to resume
+execution.  Select the "Execute INT3h breakpoint" from the DebugBreak menu,
+this should cause control to be transferred to TD32. At this time, TD32 should
+be stopped at an "int 3" instruction.  Pressing F7 (step) twice will exit the
+DebugBreak routine (in Kernel32) and return to the example program.
+Press F9 to resume execution of the example.
+
+
+
+
+The following paragraph applies only to 16 bit version of Windows.
+Be careful not to step (F7) the "ret 0010" instruction that follows a few
+instructions later.  Doing so will crash Windows.  This is not a bug in
+the example.  The reason for the crash is that the "ret 0010" transfers
+control back to Windows, specifically to a flat thunk setup by USER to call
+the window procedure.  TD32, like all other application debuggers, cannot
+step through Windows system code, doing so causes the system to deadlock.
+
+The "program has no symbol table" error, which is benign, can be eliminated
+by recompiling the example with the following command:
+
+DCC32 -h -b -v -$O- DebugBreak
+
+DebugBreak allows the creation of conditional breakpoints that are limited
+only by the capabilities of the source language.  For example, an expression
+such as:
+
+  if (SomeVariable <> SomeOtherVariable) and not (AnotherVariable <= 10)
+     then DebugBreak;
+
+allows breaking on a condition that most, if not all, debuggers do not
+support.
+
+A common use of DebugBreak during development is to implement "assert" like
+conditions, such as:
+
+  if AVariable <> ExpectedValue then DebugBreak;
+
+this causes the debugger to gain control whenever AVariable contains a value
+that is not what is expected.
+
+
+DebugBreak should only be used during program development.
+Generally speaking, finished programs should not be shipped containing calls
+to DebugBreak.
+
+That said DebugBreak can be used to make reverse engineering a program quite
+annoying by calling it whenever the presence of a debugger is detected.

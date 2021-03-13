@@ -1,0 +1,3 @@
+QueryPerformanceCounter along with QueryPerformanceFrequency can be used to
+measure elapsed time very accurately.  That's the combined purpose of these
+two APIs.

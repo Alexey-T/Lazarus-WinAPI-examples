@@ -1,0 +1,22 @@
+This example shows the use of the obsolete CreateStatusWindow API and a "quirk"
+in the number of characters a status bar displays.   CreateWindow or
+CreateWindowEx should be used instead of CreateStatusWindow.
+
+The sample program attempts to display a string that is longer
+than 137 characters in the status bar.  The string to be displayed consists
+of a sentence that is repeated three times.  If the status bar does not
+display the same sentence three times then truncation occurred.
+
+To determine where the truncation took place, the text from the status bar
+is retrieved using SB_GETTEXT and subsequently displayed in the listbox.  If
+the listbox displays the sentence three times (as expected), it indicates
+that the status bar did save the entire string but displayed only part of
+it.
+
+In spite of the fact that the status bar will only display 137 characters, it
+does keep a full copy of the string that was sent to it using SB_SETTEXT.
+
+Under build 950 of Windows 95 and, later versions as well, the status bar
+control will not display more than 137 characters.  It is not known whether
+this limit is intentional or not but, it does not seem to be documented
+anywhere.

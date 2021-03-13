@@ -1,0 +1,10 @@
+The MSDN documentation states quite a few things about the Sleep API.  This
+test program demonstrates what _actually_ happens when the sleep interval
+changes.
+
+RECOMMENDATION : _NEVER_ use an interval of zero (0).  An interval of zero (0)
+                 causes most versions of Windows (maybe all) to consume
+                 significantly more CPU than expected.
+
+To eliminate the overhead of repainting the screen, uncomment the NOPAINT
+define.

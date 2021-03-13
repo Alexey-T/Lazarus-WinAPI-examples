@@ -1,0 +1,17 @@
+This example shows how to call GetModuleHandle to retrieve the load address of
+modules in the process including the .exe itself.
+
+It also serves as an example for ModifyMenu.  The items under the
+"GetModuleHandle" menu change depending on the bitness of the program.  The
+change is done using ModifyMenu.  Notice that the items in the menu are _not_
+those declared in the .rc resource file and differ depending on the program's
+bitness.
+
+It can also serve as an example for the GetMenu and GetSubMenu APIs.  In order
+to modify a specific menu item, first the handle to the menu must be obtained
+using GetMenu and after that the handle to the popup menu associated with the
+menu item must be obtained using GetSubMenu.  Once the submenu handle is known
+then ModifyMenu can be called to modify an item in the popup menu.
+
+API unrelated note.  The width and precision stated in the StrFmt function is
+ignored by StrFmt if necessary (it is when the program is 64 bit.)

@@ -1,0 +1,1 @@
+This example shows how to retrieve the value of an environment string.

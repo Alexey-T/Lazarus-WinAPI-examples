@@ -1,0 +1,10 @@
+This example calls the GetEnvironmentStrings API immediately followed by a
+call to FreeEnvironmentStrings.
+
+In Windows 9x the FreeEnvironmentStrings function does not free the
+environment strings.  It verifies that the parameter passed does indeed point
+to the process' environment strings.  If it does the function returns TRUE
+otherwise it returns FALSE but it never frees the block.
+
+In other versions of Windows, FreeEnvironmentStrings does free a memory block
+that contains the environment strings.

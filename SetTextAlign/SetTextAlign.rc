@@ -1,0 +1,43 @@
+#include "resource.pas"
+
+APPICON                 ICON                        "APPICON.ICO"
+
+APPMENU                 MENU
+  BEGIN
+    POPUP "&File"
+      BEGIN
+         MENUITEM "E&xit"                        ,   IDM_EXIT
+      END
+
+    POPUP "&Alignment"
+      BEGIN
+        MENUITEM "Baseli&ne\tTA_BASELINE"        ,   IDM_BASELINE
+        MENUITEM "&Centered\tTA_CENTER"          ,   IDM_CENTERED
+        MENUITEM "&Bottom\tTA_BOTTOM"            ,   IDM_BOTTOM
+        MENUITEM "&Top\tTA_TOP"                  ,   IDM_TOP
+        MENUITEM "&Left\tTA_LEFT"                ,   IDM_LEFT
+        MENUITEM "&Right\tTA_RIGHT"              ,   IDM_RIGHT
+        MENUITEM SEPARATOR
+        MENUITEM "Bottom C&entered\tTA_BOTTOM or TA_CENTER",
+                                                     IDM_BOTCENTER
+      END
+
+
+    POPUP "&Help    "
+      BEGIN
+         MENUITEM "&About  SetTextAlign ..."     ,   IDM_ABOUT
+      END
+  END
+
+ABOUTBOX DIALOG 42, 20, 170, 90
+STYLE DS_MODALFRAME | WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU
+CAPTION "About SetTextAlign"
+FONT 8, "MS Sans Serif"
+BEGIN
+  ICON              "APPICON", -1, 10, 10, 32, 32
+  LTEXT             "Win32 API Example - Functions", -1, 35, 10, 170, 10
+  LTEXT             "SetTextAlign", -1, 35, 20, 170, 10
+  CTEXT             "Copyright \251 1997  440bx",-1, 1, 40, 170, 10
+  CTEXT             "All rights reserved.", -1, 1, 48, 170, 10
+  DEFPUSHBUTTON     "OK", IDOK, 60, 67, 50, 14
+END

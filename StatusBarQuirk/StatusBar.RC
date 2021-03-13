@@ -1,0 +1,29 @@
+#include "resource.pas"
+
+APPICON                 ICON                            "APPICON.ICO"
+
+APPMENU                 MENU
+  BEGIN
+    POPUP "&File"
+      BEGIN
+        MENUITEM "E&xit",                                IDM_EXIT
+      END
+
+    POPUP "&Help"
+      BEGIN
+        MENUITEM "&About StatusBar ...",                 IDM_ABOUT
+      END
+  END
+
+ABOUTBOX DIALOG 42, 20, 270, 90
+STYLE DS_MODALFRAME | WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU
+CAPTION "About StatusBar"
+FONT 8, "MS Sans Serif"
+BEGIN
+  ICON              "APPICON", -1, 30, 10, 32, 32
+  LTEXT             "Win32 API example - Functions", -1, 55, 10, 170, 10
+  LTEXT             "CreateStatusWindow - StatusBar Text Length Limit Quirk", -1, 55, 20, 270, 10
+  CTEXT             "Copyright \251 1997  440bx",-1, 50, 40, 170, 10
+  CTEXT             "All rights reserved.", -1, 50, 48, 170, 10
+  DEFPUSHBUTTON     "OK", IDOK, 110, 67, 50, 14
+END

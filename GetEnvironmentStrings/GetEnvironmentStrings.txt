@@ -1,0 +1,31 @@
+This example shows how to call the GetEnvironmentStrings to, as its name
+indicates, obtain the environment strings.  It also shows how to parse the
+block of memory where the strings resides.  As each individual string is
+identified it loads it into a listbox.
+
+NOTE: this example takes a "shortcut" when it comes to determining the
+listbox horizontal extent.  In production code, the horizontal extent should
+be calculated as the width of the longest string added into the listbox.  This
+simple program uses a hard coded estimate which in many cases will result in
+the "PATH" string not being fully visible.
+
+Future examples will show to to calculate the horizontal extent properly.
+
+Also, this example doesn't even bother to free the memory block created by
+GetEnvironmentStrings which should be done to avoid a potential memory leak.
+See the FreeEnvironmentStrings example.
+
+This example also shows how to create a status bar at the top of a window as
+well as at its bottom (the more common case.)  However, note that the API
+CreateStatusWindow is now obsolete.  CreateWindow or CreateWindowEx should be
+prefered.  Anything CreateStatusWindow can do, those APIs can do just as well.
+
+Also, this example does not show how to workaround a bug in the listbox
+control.  The bug _sometimes_ causes the contents of the listbox to be
+garbled when the window is resized and the horizontal scroll thumb is not at
+the origin, i.e, horizontal scrolling has taken place.  The reason the
+workaround code is not present is because the window isn't resizable. See the
+StatusBar example, which uses a resizable window, for the workaround.  Note,
+that the presence of this bug is likely dependent on the version of Windows.
+
+

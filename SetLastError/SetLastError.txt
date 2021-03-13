@@ -1,0 +1,6 @@
+SetLastError can be used by an application's procedures to indicate whether
+or not they successfully performed their task.
+
+NOTE : it is important NOT to call any Windows API functions after setting
+       the last error as it is very likely that the API function will
+       overwrite the last error set by the application.

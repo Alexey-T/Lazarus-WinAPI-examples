@@ -1,0 +1,32 @@
+This program determines the Windows bitness without using the APIs normally
+used to make the determination, which are, IsWow64Process() and/or
+IsWow64Process2().
+
+The advantage of not using the APIs is that the method presented here works
+under all versions of Windows from the original version of XP to today's
+versions.   Additionally this method does _not_ require rights the program
+may not have.
+
+
+For information about IsWow64Process see
+https://docs.microsoft.com/en-us/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64process
+
+
+For information about IsWow64Process2 see
+https://docs.microsoft.com/en-us/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64process2
+
+
+
+Windows API used:
+
+IsBadReadPtr(), IsDebuggerPresent(), GetSystemDirectory(), lstrlen(),
+lstrcat(), LoadLibraryEx(), FreeLibrary()
+
+
+Other common APIs used:
+
+BeginPaint(), GetClientRect(), SelectObject(), SetBkMode(), SetTextAlign(),
+GetTextExtentPoint32(), TextOut(), EndPaint(), DialogBox(), DestroyWindow(),
+PostQuitMessage(), DefWindowProc(), GetClassInfoEx(), LoadIcon(), LoadCursor(),
+GetSysColorBrush(), RegisterClassEx(), LoadImage(), CreateWindowEx(),
+GetMessage(), TranslateMessage(), DispatchMessage()
