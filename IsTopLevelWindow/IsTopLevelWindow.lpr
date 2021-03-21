@@ -124,12 +124,8 @@ begin
 
   SelectObject(dc, OldPen);          { restore the original pen               }
   ReleaseDC(Wnd, dc);
+
   DeleteObject(Pen);                 { get rid of the pen                     }
-
-  {---------------------------------------------------------------------------}
-  { release the window dc                                                     }
-
-  ReleaseDC(dc, Wnd);
 end;
 
 {-----------------------------------------------------------------------------}

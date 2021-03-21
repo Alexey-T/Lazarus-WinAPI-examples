@@ -109,8 +109,8 @@ begin
   OldPen := SelectObject(dc, Pen);
   SelectObject(dc, GetStockObject(NULL_BRUSH));  { only the frame gets drawn  }
 
-  { select a raster op that causes the original pixels to be restored when the}
-  { rectangle is drawn the second time.                                       }
+  { select a raster op that causes the original pixels to be restored when    }
+  { the rectangle is drawn the second time.                                   }
 
   SetROP2(dc, R2_NOTXORPEN);
 
@@ -124,12 +124,8 @@ begin
 
   SelectObject(dc, OldPen);          { restore the original pen               }
   ReleaseDC(Wnd, dc);
+
   DeleteObject(Pen);                 { get rid of the pen                     }
-
-  {---------------------------------------------------------------------------}
-  { release the window dc                                                     }
-
-  ReleaseDC(dc, Wnd);
 end;
 
 {-----------------------------------------------------------------------------}

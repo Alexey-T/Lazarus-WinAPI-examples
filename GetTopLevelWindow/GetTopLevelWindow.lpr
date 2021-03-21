@@ -7,7 +7,7 @@
 {$R GetTopLevelWindow.Res}
 
 program _GetTopLevelWindow;
-  { Win32 API function - GetTopLevelWindow example (undocumented)              }
+  { Win32 API function - GetTopLevelWindow example (undocumented)             }
 
 uses
   Windows,
@@ -133,12 +133,8 @@ begin
 
   SelectObject(dc, OldPen);          { restore the original pen               }
   ReleaseDC(Wnd, dc);
+
   DeleteObject(Pen);                 { get rid of the pen                     }
-
-  {---------------------------------------------------------------------------}
-  { release the window dc                                                     }
-
-  ReleaseDC(dc, Wnd);
 end;
 
 {-----------------------------------------------------------------------------}
